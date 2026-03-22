@@ -1,0 +1,240 @@
+:root {
+  --bg: #222;
+  --panel: #111;
+  --panel-2: #00000050;
+  --text: #ccc;
+  --muted: #8a93a1;
+  --border: #333;
+  --grid: rgba(255, 255, 255, 0.1);
+  --grid-strong: rgba(255, 255, 255, 0.2);
+  --axis: rgba(255, 59, 59, 0.9);
+  --graph: #ff2b2b;
+  --graph-soft: rgba(255, 43, 43, 0.22);
+  --danger: #ff6969;
+  --radius: 8px;
+  --sidebar-width: 400px;
+  --font: Inter, "Segoe UI", system-ui, sans-serif;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url("/res/fonts/Inter.ttf");
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+}
+
+button, input { font: inherit; }
+
+.app {
+  min-height: 100%;
+  padding: 12px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
+}
+
+.topbar,
+.panel,
+.graph-shell,
+.item-row {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.topbar {
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.topbar h1,
+.panel-head h2,
+.graph-head h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn {
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: border-color 0.14s ease, background 0.1s ease, transform 0.08s ease;
+}
+
+.btn:hover { background-color: #333; }
+.btn:active { transform: translateY(1px); }
+.btn.delete-btn { color: var(--danger); }
+.btn.delete-btn:hover { background-color: #8b000050; }
+
+.layout {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(300px, var(--sidebar-width)) 1fr;
+  gap: 12px;
+}
+
+.sidebar {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
+}
+
+.panel {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+}
+
+.panel:hover {
+  border-color: #ff000080;
+}
+
+.panel-grow { min-height: 0; }
+
+.panel-head,
+.graph-head {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.list {
+  min-height: 0;
+  padding: 12px;
+  overflow: auto;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.panel-footer {
+  padding: 0 12px 12px;
+}
+
+.item-row {
+  padding: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.row-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.param-top {
+  grid-template-columns: 0.65fr 1fr auto;
+}
+
+.expr-input,
+.param-name,
+.param-value {
+  min-width: 0;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 10px 11px;
+  outline: none;
+}
+
+.expr-input:focus,
+.param-name:focus,
+.param-value:focus {
+  border-color: #435065;
+}
+
+.row-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.preview,
+.muted,
+.visible-toggle {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.preview-value,
+.param-result {
+  color: var(--graph);
+  font-weight: 600;
+}
+
+.visible-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+
+.visible-toggle input {
+  accent-color: var(--graph);
+}
+
+.graph-shell {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+#graph {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--panel-2);
+  cursor: crosshair;
+}
+
+#graph.dragging { cursor: grabbing; }
+
+.readout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+
+.readout strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+@media (max-width: 980px) {
+  .layout { grid-template-columns: 1fr; }
+  .topbar { align-items: flex-start; flex-direction: column; }
+}

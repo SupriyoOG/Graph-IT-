@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Graph It!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1>GRAPH IT!</h1>
+      <div class="controls">
+        <button id="toggleAnimateBtn" class="btn" type="button">Pause t</button>
+        <button id="resetTimeBtn" class="btn" type="button">Reset t</button>
+        <button id="toggleModeBtn" class="btn" type="button" aria-pressed="false">Combined: off</button>
+        <button id="resetViewBtn" class="btn" type="button">Reset view</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Parameters</h2>
+            <span id="paramStatus" class="muted"></span>
+          </div>
+          <div id="params" class="list"></div>
+          <div class="panel-footer">
+            <button id="addParamBtn" class="btn" type="button">Add parameter</button>
+          </div>
+        </section>
+
+        <section class="panel panel-grow">
+          <div class="panel-head">
+            <h2>Expressions</h2>
+            <div class="readout">
+              <span>x</span><strong id="mouseX">0.00</strong>
+              <span>y</span><strong id="mouseY">0.00</strong>
+              <span>t</span><strong id="timeValue">0.00</strong>
+            </div>
+          </div>
+          <div id="rows" class="list"></div>
+          <div class="panel-footer">
+            <button id="addRowBtn" class="btn" type="button">Add expression</button>
+          </div>
+        </section>
+      </aside>
+
+      <section class="graph-shell">
+        <div class="graph-head">
+          <h2>Graph</h2>
+          <span id="statusText" class="muted">Ready</span>
+        </div>
+        <canvas id="graph"></canvas>
+      </section>
+    </main>
+  </div>
+
+  <template id="rowTemplate">
+    <div class="item-row">
+      <div class="row-top">
+        <input class="expr-input" spellcheck="false" autocomplete="off" autocapitalize="off" />
+        <button class="btn delete-btn" type="button">Delete</button>
+      </div>
+      <div class="row-bottom">
+        <div class="preview">= <span class="preview-value">...</span></div>
+        <label class="visible-toggle">
+          <input type="checkbox" class="visible-input" checked />
+          <span>Visible</span>
+        </label>
+      </div>
+    </div>
+  </template>
+
+  <template id="paramTemplate">
+    <div class="item-row param-row">
+      <div class="row-top param-top">
+        <input class="param-name" spellcheck="false" autocomplete="off" autocapitalize="off" />
+        <input class="param-value" spellcheck="false" autocomplete="off" autocapitalize="off" />
+        <button class="btn delete-btn" type="button">Delete</button>
+      </div>
+      <div class="row-bottom">
+        <div class="preview">global</div>
+        <div class="param-result muted">...</div>
+      </div>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
